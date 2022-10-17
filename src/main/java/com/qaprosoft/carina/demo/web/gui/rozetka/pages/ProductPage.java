@@ -3,11 +3,11 @@ package com.qaprosoft.carina.demo.web.gui.rozetka.pages;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.web.gui.rozetka.components.CartFrame;
+import com.qaprosoft.carina.demo.web.gui.rozetka.pages.categories.LaptopsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class ProductPage extends AbstractPage {
-
     @FindBy(className = "product__title")
     private ExtendedWebElement productTitle;
 
@@ -21,7 +21,6 @@ public class ProductPage extends AbstractPage {
 
     public ProductPage(WebDriver driver) {
         super(driver);
-        setPageAbsoluteURL("https://rozetka.com.ua/ua/apple_macbook_air_13_m1_256gb_2020_silver/p245161903/");
     }
 
     public CartFrame clickBuyButton() {
@@ -29,7 +28,11 @@ public class ProductPage extends AbstractPage {
         return new CartFrame(driver);
     }
 
-    public ExtendedWebElement getBuyProductBtn() {
-        return this.buyProductBtn;
+    public String getBuyProductBtnText() {
+        return this.buyProductBtn.getText();
+    }
+
+    public boolean isPageOpened(String productName){
+        return productTitle.getText().equals(productName);
     }
 }

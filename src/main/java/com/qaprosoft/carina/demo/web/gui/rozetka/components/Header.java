@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo.web.gui.rozetka.components;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
+import com.qaprosoft.carina.demo.web.gui.rozetka.pages.categories.LaptopsPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -56,5 +57,15 @@ public class Header extends AbstractUIObject {
     public CartFrame clickCartIcon() {
         cartIcon.click();
         return new CartFrame(driver);
+    }
+
+    public void typeProductNameToSearch(String productName){
+        search.type(productName);
+    }
+
+    public LaptopsPage searchProduct(String productName){
+        typeProductNameToSearch(productName);
+        searchButton.click();
+        return new LaptopsPage(driver);
     }
 }

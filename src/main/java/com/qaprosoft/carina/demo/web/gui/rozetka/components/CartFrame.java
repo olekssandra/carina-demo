@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class CartFrame extends AbstractUIObject {
 
@@ -49,21 +50,19 @@ public class CartFrame extends AbstractUIObject {
     }
 
     public CartItem findCartItem(String name) {
-        for (CartItem item : cartItems) {
-            if (item.readName().equalsIgnoreCase(name))
-                return item;
-        }
-        throw new RuntimeException("Unable to find an item: " + name);
+        return cartItems.stream().filter(item->item.readName().equalsIgnoreCase(name)).findFirst().get();
     }
 
-    public void increaseProductQuantity(String productName) {
+    public CartFrame increaseProductQuantity(String productName) {
         findCartItem(productName).clickAddProductBtn();
+        return new CartFrame(driver);
     }
 
-    public void removeProductFromCart(String productName) {
+    public CartFrame removeProductFromCart(String productName) {
         CartItem productItem = findCartItem(productName);
         productItem.clickProductActionsBtn();
         productItem.clickDeleteBtn();
+        return new CartFrame(driver);
     }
 
     public boolean idEmptyCartTitlePresent() {

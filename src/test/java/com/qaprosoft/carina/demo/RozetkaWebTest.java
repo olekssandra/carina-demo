@@ -3,10 +3,12 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.demo.web.gui.rozetka.components.CartFrame;
 import com.qaprosoft.carina.demo.web.gui.rozetka.components.Header;
-import com.qaprosoft.carina.demo.web.gui.rozetka.pages.CategoryPage;
+import com.qaprosoft.carina.demo.web.gui.rozetka.enums.ComputersSectionCategories;
+import com.qaprosoft.carina.demo.web.gui.rozetka.enums.Sections;
+import com.qaprosoft.carina.demo.web.gui.rozetka.pages.categories.LaptopsPage;
 import com.qaprosoft.carina.demo.web.gui.rozetka.pages.HomePage;
+import com.qaprosoft.carina.demo.web.gui.rozetka.pages.sections.LaptopsAndComputersSectionPage;
 import com.qaprosoft.carina.demo.web.gui.rozetka.pages.ProductPage;
-import com.qaprosoft.carina.demo.web.gui.rozetka.pages.ProductSectionPage;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -31,7 +33,8 @@ public class RozetkaWebTest implements IAbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        Assert.assertTrue(homePage.openProductSectionPage("Ноутбуки та комп’ютери").isPageOpened(), "Product section page is not opened");
+        Assert.assertTrue(homePage.openLaptopsAndComputersSectionPage("Ноутбуки та комп’ютери").isPageOpened(),
+                "Product section page is not opened");
     }
 
     @Test()
@@ -39,13 +42,14 @@ public class RozetkaWebTest implements IAbstractTest {
     public void testAddProductToCart() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        ProductSectionPage productSectionPage = homePage.openProductSectionPage("Ноутбуки та комп’ютери");
-        Assert.assertTrue(productSectionPage.isPageOpened(), "Product section page is not opened");
-        CategoryPage categoryPage = productSectionPage.openCategoryPage("Ноутбуки");
-        Assert.assertTrue(categoryPage.isPageOpened(), "Category page is not opened");
+        LaptopsAndComputersSectionPage laptopsAndComputersSectionPage =
+                homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS.getSectionName());
+        Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
+        LaptopsPage laptopsPage = laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS.getCategoryName());
+        Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
         String productName = "Ноутбук Apple MacBook Air 13\" M1 256GB 2020 (MGN93) Silver";
-        ProductPage productPage = categoryPage.selectProduct(productName);
-        Assert.assertTrue(productPage.isPageOpened(), "Product page is not opened");
+        ProductPage productPage = laptopsPage.selectProduct(productName);
+        Assert.assertTrue(productPage.isPageOpened(productName), "Product page is not opened");
         CartFrame cartFrame = productPage.clickBuyButton();
         Assert.assertEquals(cartFrame.findCartItem(productName).readName(), productName, "The product was not added to the cart");
         Assert.assertEquals(cartFrame.getFinalPrice(),"42999", "The final price is not correct");
@@ -53,7 +57,8 @@ public class RozetkaWebTest implements IAbstractTest {
         Assert.assertEquals(cartFrame.getFinalPrice(),"85998", "The final price is not correct");
         cartFrame.clickContinueShoppingBtn();
         Assert.assertFalse(cartFrame.isUIObjectPresent(), "Cart frame is not closed");
-        Assert.assertEquals(productPage.getBuyProductBtn().getText(), "В кошику","The product is not displayed as added to the cart");
+        Assert.assertEquals(productPage.getBuyProductBtnText(), "В кошику",
+                "The product is not displayed as added to the cart");
     }
 
     @Test()
@@ -61,16 +66,61 @@ public class RozetkaWebTest implements IAbstractTest {
     public void testRemoveProductFromCart() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        ProductSectionPage productSectionPage = homePage.openProductSectionPage("Ноутбуки та комп’ютери");
-        CategoryPage categoryPage = productSectionPage.openCategoryPage("Ноутбуки");
+        LaptopsAndComputersSectionPage laptopsAndComputersSectionPage =
+                homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS.getSectionName());
+        Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
+        LaptopsPage laptopsPage = laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS.getCategoryName());
+        Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
         String productName = "Ноутбук Apple MacBook Air 13\" M1 256GB 2020 (MGN93) Silver";
-        ProductPage productPage = categoryPage.selectProduct(productName);
+        ProductPage productPage = laptopsPage.selectProduct(productName);
         CartFrame cartFrame = productPage.clickBuyButton();
-        Assert.assertEquals(cartFrame.findCartItem(productName).readName(), productName, "The product was not added to the cart");
+        Assert.assertEquals(cartFrame.findCartItem(productName).readName(), productName,
+                "The product was not added to the cart");
         cartFrame.removeProductFromCart(productName);
         Assert.assertTrue(cartFrame.idEmptyCartTitlePresent(), "The empty cart title is not presented");
         cartFrame.closeCartFrame();
         Assert.assertFalse(cartFrame.isUIObjectPresent(), "Cart frame is not closed");
-        Assert.assertEquals(productPage.getBuyProductBtn().getText(), "Купити","Product page is not opened");
+        Assert.assertEquals(productPage.getBuyProductBtnText(), "Купити","Product page is not opened");
+    }
+
+    @Test()
+    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    public void testFilterProductByBrand() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        LaptopsAndComputersSectionPage laptopsAndComputersSectionPage =
+                homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS.getSectionName());
+        Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
+        LaptopsPage laptopsPage = laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS.getCategoryName());
+        Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
+        String brandName = "ASUS";
+        laptopsPage.filterByBrand(brandName);
+        Assert.assertTrue(laptopsPage.verifyProductTitles(brandName), "Products were not filtered by brand");
+    }
+
+    @Test()
+    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    public void testFilterBrandSearch() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        LaptopsAndComputersSectionPage laptopsAndComputersSectionPage =
+                homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS.getSectionName());
+        Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
+        LaptopsPage laptopsPage = laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS.getCategoryName());
+        Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
+        String brandName = "Lenovo";
+        Assert.assertTrue(laptopsPage.searchBrand(brandName), "Filter search doesn't work correctly");
+    }
+
+    @Test()
+    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    public void testProductSearch() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Header header = homePage.getHeader();
+        String product ="macbook";
+        LaptopsPage laptopsPage = header.searchProduct(product);
+        Assert.assertFalse(laptopsPage.isRequestResultEmpty(), "Nothing was found for this request");
+        Assert.assertTrue(laptopsPage.verifyProductTitles(product),"Products do not correspond to the searched name");
     }
 }

@@ -5,6 +5,7 @@ import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.web.gui.rozetka.components.Header;
+import com.qaprosoft.carina.demo.web.gui.rozetka.pages.sections.LaptopsAndComputersSectionPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -36,16 +37,13 @@ public class HomePage extends AbstractPage {
         return header;
     }
 
-    public ExtendedWebElement findSection(String name) {
+    public LaptopsAndComputersSectionPage openLaptopsAndComputersSectionPage(String sectionName) {
         for (ExtendedWebElement section : sectionLinks) {
-            if (section.getText().equalsIgnoreCase(name))
-                return section;
+            if (section.getText().equalsIgnoreCase(sectionName)){
+                section.click();
+                return new LaptopsAndComputersSectionPage(driver);
+            }
         }
         throw new RuntimeException("Unable to open section: " + name);
-    }
-
-    public ProductSectionPage openProductSectionPage(String sectionName) {
-        findSection(sectionName).click();
-        return new ProductSectionPage(driver);
     }
 }
