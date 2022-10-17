@@ -33,6 +33,6 @@ public class ProductPage extends AbstractPage {
     }
 
     public boolean isPageOpened(String productName){
-        return productTitle.getText().equals(productName);
+        return productTitle.isElementWithTextPresent(productName);
     }
 }

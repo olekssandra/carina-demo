@@ -46,6 +46,9 @@ public class LaptopsPage extends AbstractPage {
     }
 
     public boolean verifyProductTitles(String searchName) {
+        if(productItems.isEmpty()){
+            return false;
+        }
         for (ProductItem product : productItems) {
             if (!StringUtils.containsIgnoreCase(product.readName(),searchName)) {
                 return false;
@@ -56,11 +59,9 @@ public class LaptopsPage extends AbstractPage {
 
     public boolean searchBrand(String brandName) {
         brandSearch.type(brandName);
-        if(!StringUtils.containsIgnoreCase(filterBrandLink.getText(),brandName)){
-            return false;
-        }
-        return true;
+        return StringUtils.containsIgnoreCase(filterBrandLink.getText(),brandName);
     }
+
 
     public boolean isRequestResultEmpty(){
         return productItems.isEmpty();
