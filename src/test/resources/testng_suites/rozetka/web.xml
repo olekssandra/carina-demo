@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite verbose="1" name="Carina Demo Tests - Rozetka Web" parallel="methods">
+
+    <parameter name="suiteOwner" value="Oleksandra"/>
+
+    <test name="rozetka web tests">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest"/>
+        </classes>
+    </test>
+
+</suite>

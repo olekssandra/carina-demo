@@ -1,6 +1,9 @@
 package com.qaprosoft.carina.demo;
 
 
+import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
+import com.qaprosoft.carina.demo.web.gui.rozetka.common.LaptopsAndComputersSectionPageBase;
+import com.qaprosoft.carina.demo.web.gui.rozetka.common.LaptopsPageBase;
 import com.qaprosoft.carina.demo.web.gui.rozetka.components.CartFrame;
 import com.qaprosoft.carina.demo.web.gui.rozetka.components.Header;
 import com.qaprosoft.carina.demo.web.gui.rozetka.enums.ComputersSectionCategories;
@@ -18,6 +21,7 @@ import com.qaprosoft.carina.core.foundation.IAbstractTest;
 public class RozetkaWebTest implements IAbstractTest {
 
     @Test()
+    @MethodOwner(owner = "oleksandra")
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void testHeaderVerifying() {
         HomePage homePage = new HomePage(getDriver());
@@ -33,7 +37,7 @@ public class RozetkaWebTest implements IAbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        Assert.assertTrue(homePage.openLaptopsAndComputersSectionPage("Ноутбуки та комп’ютери").isPageOpened(),
+        Assert.assertTrue(homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS).isPageOpened(),
                 "Product section page is not opened");
     }
 
@@ -42,10 +46,10 @@ public class RozetkaWebTest implements IAbstractTest {
     public void testAddProductToCart() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        LaptopsAndComputersSectionPage laptopsAndComputersSectionPage =
-                homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS.getSectionName());
+        LaptopsAndComputersSectionPageBase laptopsAndComputersSectionPage =
+                (LaptopsAndComputersSectionPageBase) homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS);
         Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
-        LaptopsPage laptopsPage = laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS.getCategoryName());
+        LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
         String productName = "Ноутбук Apple MacBook Air 13\" M1 256GB 2020 (MGN93) Silver";
         ProductPage productPage = laptopsPage.selectProduct(productName);
@@ -66,10 +70,10 @@ public class RozetkaWebTest implements IAbstractTest {
     public void testRemoveProductFromCart() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        LaptopsAndComputersSectionPage laptopsAndComputersSectionPage =
-                homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS.getSectionName());
+        LaptopsAndComputersSectionPageBase laptopsAndComputersSectionPage =
+                (LaptopsAndComputersSectionPageBase) homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS);
         Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
-        LaptopsPage laptopsPage = laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS.getCategoryName());
+        LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
         String productName = "Ноутбук Apple MacBook Air 13\" M1 256GB 2020 (MGN93) Silver";
         ProductPage productPage = laptopsPage.selectProduct(productName);
@@ -88,10 +92,10 @@ public class RozetkaWebTest implements IAbstractTest {
     public void testFilterProductByBrand() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        LaptopsAndComputersSectionPage laptopsAndComputersSectionPage =
-                homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS.getSectionName());
+        LaptopsAndComputersSectionPageBase laptopsAndComputersSectionPage =
+                (LaptopsAndComputersSectionPageBase) homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS);
         Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
-        LaptopsPage laptopsPage = laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS.getCategoryName());
+        LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
         String brandName = "ASUS";
         laptopsPage.filterByBrand(brandName);
@@ -103,10 +107,10 @@ public class RozetkaWebTest implements IAbstractTest {
     public void testFilterBrandSearch() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        LaptopsAndComputersSectionPage laptopsAndComputersSectionPage =
-                homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS.getSectionName());
+        LaptopsAndComputersSectionPageBase laptopsAndComputersSectionPage =
+                (LaptopsAndComputersSectionPageBase) homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS);
         Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
-        LaptopsPage laptopsPage = laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS.getCategoryName());
+        LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
         String brandName = "Lenovo";
         Assert.assertTrue(laptopsPage.searchBrand(brandName), "Filter search doesn't work correctly");

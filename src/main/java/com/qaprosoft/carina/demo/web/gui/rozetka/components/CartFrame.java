@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CartFrame extends AbstractUIObject {
@@ -50,7 +51,7 @@ public class CartFrame extends AbstractUIObject {
     }
 
     public CartItem findCartItem(String name) {
-        return cartItems.stream().filter(item->item.readName().equalsIgnoreCase(name)).findFirst().get();
+        return cartItems.stream().filter(item->item.readName().equalsIgnoreCase(name)).collect(Collectors.toList()).get(0);
     }
 
     public CartFrame increaseProductQuantity(String productName) {

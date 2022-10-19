@@ -5,9 +5,12 @@ import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.web.gui.rozetka.components.Header;
+import com.qaprosoft.carina.demo.web.gui.rozetka.enums.Sections;
 import com.qaprosoft.carina.demo.web.gui.rozetka.pages.sections.LaptopsAndComputersSectionPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -30,20 +33,16 @@ public class HomePage extends AbstractPage {
 
     public HomePage(WebDriver driver) {
         super(driver);
-        setPageAbsoluteURL(R.CONFIG.get(Configuration.Parameter.URL.getKey()));
     }
 
     public Header getHeader() {
         return header;
     }
 
-    public LaptopsAndComputersSectionPage openLaptopsAndComputersSectionPage(String sectionName) {
-        for (ExtendedWebElement section : sectionLinks) {
-            if (section.getText().equalsIgnoreCase(sectionName)){
-                section.click();
-                return new LaptopsAndComputersSectionPage(driver);
-            }
-        }
-        throw new RuntimeException("Unable to open section: " + name);
+    public AbstractPage openLaptopsAndComputersSectionPage(Sections section) {
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='menu-categories menu-categories_type_main']//a")), 5);
+        sectionLinks.stream().filter(sectionLink->sectionLink.getText().equalsIgnoreCase(section.getSectionName()))
+                .findFirst().get().click();
+        return initPage(driver, section.getSectionPage());
     }
 }
