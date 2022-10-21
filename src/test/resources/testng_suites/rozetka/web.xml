@@ -1,11 +1,95 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite verbose="1" name="Carina Demo Tests - Rozetka Web" parallel="methods">
+<suite verbose="1" name="Carina Demo Tests - Rozetka Web">
 
     <parameter name="suiteOwner" value="Oleksandra"/>
 
-    <test name="rozetka web tests">
+    <test name="Header verifying">
         <classes>
-            <class name="com.qaprosoft.carina.demo.RozetkaWebTest"/>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
+                <methods>
+                    <include name="testHeaderVerifying" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Opening the products section">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
+                <methods>
+                    <include name="testProductSectionOpening" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Adding product to cart">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
+                <methods>
+                    <include name="testAddProductToCart" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Removing product from the cart">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
+                <methods>
+                    <include name="testRemoveProductFromCart" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Filter verifying">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
+                <methods>
+                    <include name="testFilterProductByBrand" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Filter search verifying">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
+                <methods>
+                    <include name="testFilterBrandSearch" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Main product search verifying">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
+                <methods>
+                    <include name="testProductSearch" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Sorting products">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
+                <methods>
+                    <include name="testSortProductsFromExpensiveToCheap" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Adding product to compare list">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
+                <methods>
+                    <include name="testAddProductToCompareList" />
+                </methods>
+            </class>
         </classes>
     </test>
 

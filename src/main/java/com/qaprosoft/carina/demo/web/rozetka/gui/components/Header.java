@@ -1,16 +1,18 @@
-package com.qaprosoft.carina.demo.web.gui.rozetka.components;
+package com.qaprosoft.carina.demo.web.rozetka.gui.components;
 
+import com.qaprosoft.carina.core.foundation.utils.factory.ICustomTypePageFactory;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.web.gui.rozetka.pages.categories.LaptopsPage;
+import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.LaptopsPageBase;
+import com.qaprosoft.carina.demo.web.rozetka.gui.pages.desktop.categories.LaptopsPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class Header extends AbstractUIObject {
+public class Header extends AbstractUIObject implements ICustomTypePageFactory {
 
     @FindBy(className = "header__logo")
     private ExtendedWebElement homeLink;
@@ -45,6 +47,9 @@ public class Header extends AbstractUIObject {
     @FindBy(xpath = "//span[@class='counter counter--green ng-star-inserted']")
     private ExtendedWebElement productCounter;
 
+    @FindBy(css = "button[aria-label='Списки порівнянь']")
+    private ExtendedWebElement compareListIcon;
+
     public Header(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -63,9 +68,14 @@ public class Header extends AbstractUIObject {
         search.type(productName);
     }
 
-    public LaptopsPage searchProduct(String productName){
+    public LaptopsPageBase searchProduct(String productName){
         typeProductNameToSearch(productName);
         searchButton.click();
-        return new LaptopsPage(driver);
+        return initPage(getDriver(), LaptopsPageBase.class);
+    }
+
+    public CompareList clickCompareListIcon(){
+        compareListIcon.click();
+        return new CompareList(driver);
     }
 }

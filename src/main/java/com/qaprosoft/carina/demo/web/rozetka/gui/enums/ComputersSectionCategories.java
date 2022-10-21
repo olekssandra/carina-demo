@@ -1,8 +1,7 @@
-package com.qaprosoft.carina.demo.web.gui.rozetka.enums;
+package com.qaprosoft.carina.demo.web.rozetka.gui.enums;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.web.gui.rozetka.common.LaptopsPageBase;
-import com.qaprosoft.carina.demo.web.gui.rozetka.pages.categories.LaptopsPage;
+import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.LaptopsPageBase;
 
 public enum ComputersSectionCategories {
     LAPTOPS("Ноутбуки", LaptopsPageBase.class);

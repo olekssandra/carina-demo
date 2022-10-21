@@ -1,19 +1,22 @@
-package com.qaprosoft.carina.demo.web.gui.rozetka.components;
+package com.qaprosoft.carina.demo.web.rozetka.gui.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CartFrame extends AbstractUIObject {
 
     @FindBy(xpath = "//ul[@class='cart-list ng-star-inserted']/li")
     private List<CartItem> cartItems;
+
+    @FindBy(xpath = "//ul[@class='cart-list ng-star-inserted']/li")
+    private ExtendedWebElement firstCartItem;
 
     @FindBy(xpath = "//div[@class='cart-receipt__sum-price']/span[1]")
     private ExtendedWebElement finalPrice;
@@ -47,14 +50,17 @@ public class CartFrame extends AbstractUIObject {
     }
 
     public String getFinalPrice() {
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(finalPrice.getBy()),3);
         return finalPrice.getText();
     }
 
     public CartItem findCartItem(String name) {
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(firstCartItem.getBy()), 5);
         return cartItems.stream().filter(item->item.readName().equalsIgnoreCase(name)).collect(Collectors.toList()).get(0);
     }
 
     public CartFrame increaseProductQuantity(String productName) {
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(firstCartItem.getBy()), 5);
         findCartItem(productName).clickAddProductBtn();
         return new CartFrame(driver);
     }
