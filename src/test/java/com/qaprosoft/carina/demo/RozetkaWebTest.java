@@ -93,7 +93,7 @@ public class RozetkaWebTest implements IAbstractTest {
                 (LaptopsAndComputersSectionPageBase) homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS);
         Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
         LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
-        Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
+        Assert.assertTrue(laptopsPage.isPageOpened(), "Laptops page is not opened");
         String brandName = "ASUS";
         laptopsPage.filterProductsByItem(brandName);
         Assert.assertTrue(laptopsPage.verifyProductTitles(brandName), "Products were not filtered by brand");
@@ -108,7 +108,7 @@ public class RozetkaWebTest implements IAbstractTest {
                 (LaptopsAndComputersSectionPageBase) homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS);
         Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
         LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
-        Assert.assertTrue(laptopsPage.isPageOpened(), "Category page is not opened");
+        Assert.assertTrue(laptopsPage.isPageOpened(), "Laptops page is not opened");
         String brandName = "Lenovo";
         Assert.assertTrue(laptopsPage.searchBrand(brandName), "Filter search doesn't work correctly");
     }
@@ -138,7 +138,7 @@ public class RozetkaWebTest implements IAbstractTest {
         laptopsPage.filterProductsByItem(brand);
         Assert.assertTrue(laptopsPage.verifyProductTitles(brand), "Products were not filtered by brand");
         laptopsPage.sortProductsByOption(ProductSortingOptions.CHEAP_TO_EXPENSIVE.getOptionName());
-        Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.CHEAP_TO_EXPENSIVE.getOptionName()), "Products were not sorted from expensive to cheap");
+        Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.CHEAP_TO_EXPENSIVE.getOptionName()), "Products were not sorted from cheap to expensive");
     }
 
     @Test()
@@ -154,7 +154,7 @@ public class RozetkaWebTest implements IAbstractTest {
         laptopsPage.filterProductsByItem(brand);
         Assert.assertTrue(laptopsPage.verifyProductTitles(brand), "Products were not filtered by brand");
         laptopsPage.sortProductsByOption(ProductSortingOptions.EXPENSIVE_TO_CHEAP.getOptionName());
-        Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.EXPENSIVE_TO_CHEAP.getOptionName()), "Products were not sorted from cheap to expensive");
+        Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.EXPENSIVE_TO_CHEAP.getOptionName()), "Products were not sorted from expensive to cheap");
         String productName = laptopsPage.getFirstProductName();
         ProductPageBase productPage = laptopsPage.openFirstProduct();
         Assert.assertTrue(productPage.isPageOpened(productName), "Product page is not opened");
