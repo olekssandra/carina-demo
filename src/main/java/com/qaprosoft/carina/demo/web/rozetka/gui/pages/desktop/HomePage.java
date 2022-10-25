@@ -7,7 +7,6 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.Header;
 import com.qaprosoft.carina.demo.web.rozetka.gui.enums.Sections;
 import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.HomePageBase;
-import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.ProductComparisonPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;

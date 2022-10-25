@@ -31,11 +31,11 @@ public enum Sections {
         this.sectionPage = sectionPage;
     }
 
-    public String getSectionName(){
+    public String getSectionName() {
         return this.sectionName;
     }
 
-    public Class<? extends AbstractPage> getSectionPage(){
+    public Class<? extends AbstractPage> getSectionPage() {
         return this.sectionPage;
     }
 }

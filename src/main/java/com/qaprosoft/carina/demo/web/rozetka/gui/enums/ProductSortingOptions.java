@@ -12,7 +12,7 @@ public enum ProductSortingOptions {
         this.optionName = sortName;
     }
 
-    public String getOptionName(){
+    public String getOptionName() {
         return this.optionName;
     }
 }

@@ -31,7 +31,6 @@ public class LaptopsAndComputersSectionPage extends LaptopsAndComputersSectionPa
 
     @Override
     public AbstractPage openCategoryPage(ComputersSectionCategories computerCategory) {
-        System.out.println(firstCategory.getText());
         waitUntil(ExpectedConditions.visibilityOfElementLocated(firstCategory.getBy()), 5);
         categories.stream().filter(category -> category.getText().equalsIgnoreCase(computerCategory.getCategoryName()))
                 .findFirst().get().click();

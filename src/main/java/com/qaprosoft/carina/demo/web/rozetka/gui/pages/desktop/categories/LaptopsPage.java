@@ -10,7 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -102,6 +105,7 @@ public class LaptopsPage extends LaptopsPageBase {
 
     @Override
     public ProductPageBase openFirstProduct() {
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(firstProductItem.getBy()), 5);
         return productItems.get(0).openProductPage();
     }
 

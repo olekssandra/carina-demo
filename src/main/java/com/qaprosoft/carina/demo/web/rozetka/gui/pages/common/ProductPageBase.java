@@ -13,8 +13,6 @@ public abstract class ProductPageBase extends AbstractPage {
 
     public abstract Header getHeader();
 
-    public abstract boolean isCartFramePresent();
-
     public abstract CartFrame clickBuyButton();
 
     public abstract String getBuyProductBtnText();

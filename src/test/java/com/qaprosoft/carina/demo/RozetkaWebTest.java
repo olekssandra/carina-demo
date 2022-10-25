@@ -1,18 +1,18 @@
 package com.qaprosoft.carina.demo;
 
 
+import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.demo.web.rozetka.gui.components.CompareList;
-import com.qaprosoft.carina.demo.web.rozetka.gui.enums.ProductSortingOptions;
-import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.*;
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.CartFrame;
+import com.qaprosoft.carina.demo.web.rozetka.gui.components.CompareList;
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.Header;
 import com.qaprosoft.carina.demo.web.rozetka.gui.enums.ComputersSectionCategories;
+import com.qaprosoft.carina.demo.web.rozetka.gui.enums.ProductSortingOptions;
 import com.qaprosoft.carina.demo.web.rozetka.gui.enums.Sections;
+import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import com.qaprosoft.carina.core.foundation.IAbstractTest;
 
 
 public class RozetkaWebTest implements IAbstractTest {
@@ -53,9 +53,9 @@ public class RozetkaWebTest implements IAbstractTest {
         Assert.assertTrue(productPage.isPageOpened(productName), "Product page is not opened");
         CartFrame cartFrame = productPage.clickBuyButton();
         Assert.assertEquals(cartFrame.findCartItem(productName).readName(), productName, "The product was not added to the cart");
-        Assert.assertEquals(cartFrame.getFinalPrice(),"42999", "The final price is not correct");
+        Assert.assertEquals(cartFrame.getFinalPrice(), "42999", "The final price is not correct");
         cartFrame.increaseProductQuantity(productName);
-        Assert.assertEquals(cartFrame.getFinalPrice(),"85998", "The final price is not correct");
+        Assert.assertEquals(cartFrame.getFinalPrice(), "85998", "The final price is not correct");
         cartFrame.clickContinueShoppingBtn();
         Assert.assertFalse(cartFrame.isUIObjectPresent(), "Cart frame is not closed");
         Assert.assertEquals(productPage.getBuyProductBtnText(), "В кошику",
@@ -81,7 +81,7 @@ public class RozetkaWebTest implements IAbstractTest {
         Assert.assertTrue(cartFrame.idEmptyCartTitlePresent(), "The empty cart title is not presented");
         cartFrame.closeCartFrame();
         Assert.assertFalse(cartFrame.isUIObjectPresent(), "Cart frame is not closed");
-        Assert.assertEquals(productPage.getBuyProductBtnText(), "Купити","Product page is not opened");
+        Assert.assertEquals(productPage.getBuyProductBtnText(), "Купити", "Product page is not opened");
     }
 
     @Test()
@@ -119,10 +119,10 @@ public class RozetkaWebTest implements IAbstractTest {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         Header header = homePage.getHeader();
-        String product ="macbook";
+        String product = "macbook";
         LaptopsPageBase laptopsPage = header.searchProduct(product);
         Assert.assertFalse(laptopsPage.isRequestResultEmpty(), "Nothing was found for this request");
-        Assert.assertTrue(laptopsPage.verifyProductTitles(product),"Products do not correspond to the searched name");
+        Assert.assertTrue(laptopsPage.verifyProductTitles(product), "Products do not correspond to the searched name");
     }
 
     @Test()
@@ -136,9 +136,9 @@ public class RozetkaWebTest implements IAbstractTest {
         LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         String brand = "Lenovo";
         laptopsPage.filterProductsByItem(brand);
-        Assert.assertTrue(laptopsPage.verifyProductTitles(brand),"Products were not filtered by brand");
+        Assert.assertTrue(laptopsPage.verifyProductTitles(brand), "Products were not filtered by brand");
         laptopsPage.sortProductsByOption(ProductSortingOptions.CHEAP_TO_EXPENSIVE.getOptionName());
-        Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.CHEAP_TO_EXPENSIVE.getOptionName()),"Products were not sorted from expensive to cheap");
+        Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.CHEAP_TO_EXPENSIVE.getOptionName()), "Products were not sorted from expensive to cheap");
     }
 
     @Test()
@@ -152,9 +152,9 @@ public class RozetkaWebTest implements IAbstractTest {
         LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         String brand = "Lenovo";
         laptopsPage.filterProductsByItem(brand);
-        Assert.assertTrue(laptopsPage.verifyProductTitles(brand),"Products were not filtered");
+        Assert.assertTrue(laptopsPage.verifyProductTitles(brand), "Products were not filtered by brand");
         laptopsPage.sortProductsByOption(ProductSortingOptions.EXPENSIVE_TO_CHEAP.getOptionName());
-        Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.EXPENSIVE_TO_CHEAP.getOptionName()),"Products were not sorted from cheap to expensive");
+        Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.EXPENSIVE_TO_CHEAP.getOptionName()), "Products were not sorted from cheap to expensive");
         String productName = laptopsPage.getFirstProductName();
         ProductPageBase productPage = laptopsPage.openFirstProduct();
         Assert.assertTrue(productPage.isPageOpened(productName), "Product page is not opened");

@@ -4,12 +4,10 @@ import com.qaprosoft.carina.core.foundation.utils.factory.ICustomTypePageFactory
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.ProductComparisonPageBase;
-import com.qaprosoft.carina.demo.web.rozetka.gui.pages.desktop.ProductComparisonPage;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -29,12 +27,12 @@ public class CompareList extends AbstractUIObject implements ICustomTypePageFact
         super(driver);
     }
 
-    public boolean checkComparisonListsContainsList(String listName){
-        return comparisonListNames.stream().anyMatch(name-> StringUtils.containsIgnoreCase(name.getText(),listName));
+    public boolean checkComparisonListsContainsList(String listName) {
+        return comparisonListNames.stream().anyMatch(name -> StringUtils.containsIgnoreCase(name.getText(), listName));
     }
 
-    public ProductComparisonPageBase openComparisonList(String listName){
-        comparisonListNames.stream().filter(name-> StringUtils.containsIgnoreCase(name.getText(),listName))
+    public ProductComparisonPageBase openComparisonList(String listName) {
+        comparisonListNames.stream().filter(name -> StringUtils.containsIgnoreCase(name.getText(), listName))
                 .findFirst().get().click();
         return initPage(getDriver(), ProductComparisonPageBase.class);
     }

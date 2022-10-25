@@ -29,8 +29,6 @@ public class ProductComparisonPage extends ProductComparisonPageBase {
 
     @Override
     public boolean verifyProduct(String productName) {
-        System.out.println(productName);
-        System.out.println(comparedProductsNames.get(0).getText());
         return comparedProductsNames.stream().anyMatch(name -> StringUtils.equalsIgnoreCase(name.getText(), productName));
     }
 }

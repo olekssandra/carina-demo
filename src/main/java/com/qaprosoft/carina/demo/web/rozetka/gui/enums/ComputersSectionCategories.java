@@ -24,18 +24,18 @@ public enum ComputersSectionCategories {
 //    INTERACTIVE_EQUIPMENT("Інтерактивне обладнання");
     private final String categoryName;
 
-    private Class<? extends AbstractPage> categoryPage;
+    private final Class<? extends AbstractPage> categoryPage;
 
     ComputersSectionCategories(String categoryName, Class<? extends AbstractPage> categoryPage) {
         this.categoryName = categoryName;
-        this.categoryPage= categoryPage;
+        this.categoryPage = categoryPage;
     }
 
-    public String getCategoryName(){
+    public String getCategoryName() {
         return this.categoryName;
     }
 
-    public Class<? extends AbstractPage> getCategoryPage(){
+    public Class<? extends AbstractPage> getCategoryPage() {
         return this.categoryPage;
     }
 }

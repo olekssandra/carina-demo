@@ -5,11 +5,9 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.CartFrame;
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.CompareList;
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.Header;
-import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.ProductComparisonPageBase;
 import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.ProductPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = ProductPageBase.class)
 public class ProductPage extends ProductPageBase {
@@ -44,10 +42,6 @@ public class ProductPage extends ProductPageBase {
         return header;
     }
 
-    public boolean isCartFramePresent() {
-        return cartFrame.isUIObjectPresent();
-    }
-
     @Override
     public CartFrame clickBuyButton() {
         buyProductBtn.click();
@@ -66,7 +60,7 @@ public class ProductPage extends ProductPageBase {
 
     @Override
     public void addProductToCompareList() {
-        waitUntil(ExpectedConditions.invisibilityOfElementLocated(img.getBy()), 5);
+        compareBtn.hover();
         compareBtn.click();
     }
 

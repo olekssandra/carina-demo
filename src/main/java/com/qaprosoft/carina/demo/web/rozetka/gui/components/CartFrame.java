@@ -50,13 +50,13 @@ public class CartFrame extends AbstractUIObject {
     }
 
     public String getFinalPrice() {
-        waitUntil(ExpectedConditions.visibilityOfElementLocated(finalPrice.getBy()),3);
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(finalPrice.getBy()), 3);
         return finalPrice.getText();
     }
 
     public CartItem findCartItem(String name) {
         waitUntil(ExpectedConditions.visibilityOfElementLocated(firstCartItem.getBy()), 5);
-        return cartItems.stream().filter(item->item.readName().equalsIgnoreCase(name)).collect(Collectors.toList()).get(0);
+        return cartItems.stream().filter(item -> item.readName().equalsIgnoreCase(name)).collect(Collectors.toList()).get(0);
     }
 
     public CartFrame increaseProductQuantity(String productName) {

@@ -5,7 +5,6 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.LaptopsPageBase;
-import com.qaprosoft.carina.demo.web.rozetka.gui.pages.desktop.categories.LaptopsPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -64,17 +63,17 @@ public class Header extends AbstractUIObject implements ICustomTypePageFactory {
         return new CartFrame(driver);
     }
 
-    public void typeProductNameToSearch(String productName){
+    public void typeProductNameToSearch(String productName) {
         search.type(productName);
     }
 
-    public LaptopsPageBase searchProduct(String productName){
+    public LaptopsPageBase searchProduct(String productName) {
         typeProductNameToSearch(productName);
         searchButton.click();
         return initPage(getDriver(), LaptopsPageBase.class);
     }
 
-    public CompareList clickCompareListIcon(){
+    public CompareList clickCompareListIcon() {
         compareListIcon.click();
         return new CompareList(driver);
     }
