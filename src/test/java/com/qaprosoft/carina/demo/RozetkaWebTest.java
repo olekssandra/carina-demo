@@ -18,8 +18,8 @@ import org.testng.annotations.Test;
 public class RozetkaWebTest implements IAbstractTest {
 
     @Test()
-    @MethodOwner(owner = "oleksandra")
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    @MethodOwner(owner = "oordak")
+    @TestLabel(name = "feature", value = {"web"})
     public void testHeaderVerifying() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -29,7 +29,8 @@ public class RozetkaWebTest implements IAbstractTest {
     }
 
     @Test()
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    @MethodOwner(owner = "oordak")
+    @TestLabel(name = "feature", value = {"web"})
     public void testProductSectionOpening() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -39,7 +40,8 @@ public class RozetkaWebTest implements IAbstractTest {
     }
 
     @Test()
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    @MethodOwner(owner = "oordak")
+    @TestLabel(name = "feature", value = {"web"})
     public void testAddProductToCart() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -63,7 +65,8 @@ public class RozetkaWebTest implements IAbstractTest {
     }
 
     @Test()
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    @MethodOwner(owner = "oordak")
+    @TestLabel(name = "feature", value = {"web"})
     public void testRemoveProductFromCart() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -85,7 +88,8 @@ public class RozetkaWebTest implements IAbstractTest {
     }
 
     @Test()
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    @MethodOwner(owner = "oordak")
+    @TestLabel(name = "feature", value = {"web"})
     public void testFilterProductByBrand() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -100,7 +104,8 @@ public class RozetkaWebTest implements IAbstractTest {
     }
 
     @Test()
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    @MethodOwner(owner = "oordak")
+    @TestLabel(name = "feature", value = {"web"})
     public void testFilterBrandSearch() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -114,7 +119,8 @@ public class RozetkaWebTest implements IAbstractTest {
     }
 
     @Test()
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    @MethodOwner(owner = "oordak")
+    @TestLabel(name = "feature", value = {"web"})
     public void testProductSearch() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -126,7 +132,8 @@ public class RozetkaWebTest implements IAbstractTest {
     }
 
     @Test()
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    @MethodOwner(owner = "oordak")
+    @TestLabel(name = "feature", value = {"web"})
     public void testSortProductsFromExpensiveToCheap() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -142,7 +149,8 @@ public class RozetkaWebTest implements IAbstractTest {
     }
 
     @Test()
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    @MethodOwner(owner = "oordak")
+    @TestLabel(name = "feature", value = {"web"})
     public void testAddProductToCompareList() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
