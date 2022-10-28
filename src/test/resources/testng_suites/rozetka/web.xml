@@ -4,8 +4,6 @@
     <parameter name="suiteOwner" value="oordak"/>
 
     <test name="Header verifying">
-        <parameter name="methodOwner" value="oordak"/>
-        <parameter name="feature" value="web"/>
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
@@ -16,8 +14,6 @@
     </test>
 
     <test name="Opening the products section">
-        <parameter name="methodOwner" value="oordak"/>
-        <parameter name="feature" value="web"/>
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
@@ -28,8 +24,6 @@
     </test>
 
     <test name="Adding product to cart">
-        <parameter name="methodOwner" value="oordak"/>
-        <parameter name="feature" value="web"/>
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
@@ -40,8 +34,6 @@
     </test>
 
     <test name="Removing product from the cart">
-        <parameter name="methodOwner" value="oordak"/>
-        <parameter name="feature" value="web"/>
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
@@ -52,8 +44,6 @@
     </test>
 
     <test name="Filter verifying">
-        <parameter name="methodOwner" value="oordak"/>
-        <parameter name="feature" value="web"/>
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
@@ -64,8 +54,6 @@
     </test>
 
     <test name="Filter search verifying">
-        <parameter name="methodOwner" value="oordak"/>
-        <parameter name="feature" value="web"/>
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
@@ -76,8 +64,6 @@
     </test>
 
     <test name="Product main search verifying">
-        <parameter name="methodOwner" value="oordak"/>
-        <parameter name="feature" value="web"/>
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
@@ -88,8 +74,6 @@
     </test>
 
     <test name="Product sorting">
-        <parameter name="methodOwner" value="oordak"/>
-        <parameter name="feature" value="web"/>
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
@@ -100,8 +84,6 @@
     </test>
 
     <test name="Adding product to compare list">
-        <parameter name="methodOwner" value="oordak"/>
-        <parameter name="feature" value="web"/>
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
