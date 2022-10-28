@@ -50,7 +50,7 @@ public class CartFrame extends AbstractUIObject {
     }
 
     public String getFinalPrice() {
-        waitUntil(ExpectedConditions.visibilityOfElementLocated(finalPrice.getBy()), 3);
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(finalPrice.getBy()), 5);
         return finalPrice.getText();
     }
 
