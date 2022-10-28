@@ -16,7 +16,7 @@
 		<carina-core_version>8.0.0</carina-core_version>
 		<java.version>11</java.version>
 		<zebrunner-agent.version>1.8.0</zebrunner-agent.version>
-		<suite>helloWorld</suite>
+		<suite>web-rozetka</suite>
 	</properties>
 
 	<repositories>
@@ -125,7 +125,7 @@
 					<argLine>-javaagent:${project.build.directory}/agent/zebrunner-agent.jar</argLine>
 					<useSystemClassLoader>false</useSystemClassLoader>
 					<suiteXmlFiles>
-						<suiteXmlFile>${project.build.directory}/test-classes/testng_suites/${suite}.xml</suiteXmlFile>
+						<suiteXmlFile>${project.build.directory}/test-classes/testng_suites/rozetka/${suite}.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
