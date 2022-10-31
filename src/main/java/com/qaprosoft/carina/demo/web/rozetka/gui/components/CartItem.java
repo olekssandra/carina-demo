@@ -8,11 +8,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class CartItem extends AbstractUIObject {
 
-    @FindBy(className = "cart-product__title")
+    @FindBy(xpath = ".//a[@class='cart-product__title']")
     private ExtendedWebElement productTitle;
-
-    @FindBy(css = "input.cart-counter__input.ng-untouched.ng-pristine.ng-valid")
-    private ExtendedWebElement productQuantity;
 
     @FindBy(xpath = ".//button[@class='button button_color_white button_size_medium cart-counter__button'][2]")
     private ExtendedWebElement addProductBtn;

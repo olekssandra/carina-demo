@@ -53,6 +53,7 @@ public class RozetkaWebTest implements IAbstractTest {
         String productName = "Ноутбук Apple MacBook Air 13\" M1 256GB 2020 (MGN63) Space Gray";
         ProductPageBase productPage = laptopsPage.selectProduct(productName);
         Assert.assertTrue(productPage.isPageOpened(productName), "Product page is not opened");
+        //Header header = productPage.getHeader();
         CartFrame cartFrame = productPage.clickBuyButton();
         Assert.assertEquals(cartFrame.findCartItem(productName).readName(), productName, "The product was not added to the cart");
         Assert.assertEquals(cartFrame.getFinalPrice(), "42999", "The final price is not correct");
@@ -81,7 +82,7 @@ public class RozetkaWebTest implements IAbstractTest {
         Assert.assertEquals(cartFrame.findCartItem(productName).readName(), productName,
                 "The product was not added to the cart");
         cartFrame.removeProductFromCart(productName);
-        Assert.assertTrue(cartFrame.idEmptyCartTitlePresent(), "The empty cart title is not presented");
+        Assert.assertTrue(cartFrame.isEmptyCartTitlePresent(), "The empty cart title is not presented");
         cartFrame.closeCartFrame();
         Assert.assertFalse(cartFrame.isUIObjectPresent(), "Cart frame is not closed");
         Assert.assertEquals(productPage.getBuyProductBtnText(), "Купити", "Product page is not opened");
