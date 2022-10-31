@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 
 public class CartFrame extends AbstractUIObject {
 
+    @FindBy(className = "modal__holder_show_animation")
+    private ExtendedWebElement frame;
+
     @FindBy(xpath = "//ul[@class='cart-list ng-star-inserted']/li")
     private List<CartItem> cartItems;
 
@@ -72,7 +75,7 @@ public class CartFrame extends AbstractUIObject {
         return new CartFrame(driver);
     }
 
-    public boolean idEmptyCartTitlePresent() {
+    public boolean isEmptyCartTitlePresent() {
         return this.emptyCartTitle.isElementPresent();
     }
 }

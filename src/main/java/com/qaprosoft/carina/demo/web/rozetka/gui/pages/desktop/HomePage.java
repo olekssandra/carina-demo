@@ -25,15 +25,6 @@ public class HomePage extends HomePageBase implements ICustomTypePageFactory {
     @FindBy(xpath = "//ul[@class='menu-categories menu-categories_type_main']//a")
     private ExtendedWebElement firstSection;
 
-    @FindBy(xpath = "//div[@class='simple-slider__holder']//li")
-    private List<ExtendedWebElement> sliderItems;
-
-    @FindBy(xpath = "(//section[@class='main-goods ng-star-inserted'])[1]//li")
-    private List<ExtendedWebElement> promotionalOffersItems;
-
-    @FindBy(css = "div>rz-service-links[cssclass='side'] a")
-    private List<ExtendedWebElement> sidebarServiceLinks;
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
