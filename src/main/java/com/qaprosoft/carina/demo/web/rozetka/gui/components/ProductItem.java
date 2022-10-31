@@ -16,8 +16,8 @@ public class ProductItem extends AbstractUIObject implements ICustomTypePageFact
     @FindBy(xpath = ".//span[@class='goods-tile__price-value']")
     private ExtendedWebElement productPrice;
 
-    @FindBy(xpath = ".//button[@class='buy-button goods-tile__buy-button ng-star-inserted']")
-    private ExtendedWebElement productCartBtns;
+    @FindBy(xpath = ".//div[@class='goods-tile__prices']//button")
+    private ExtendedWebElement productCartBtn;
 
     public ProductItem(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);

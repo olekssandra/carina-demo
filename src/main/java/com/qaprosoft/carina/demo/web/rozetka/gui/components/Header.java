@@ -16,7 +16,7 @@ public class Header extends AbstractUIObject implements ICustomTypePageFactory {
     @FindBy(className = "header__logo")
     private ExtendedWebElement homeLink;
 
-    @FindBy(className = "//button[@class='header__button ng-tns-c94-1']")
+    @FindBy(xpath = "(//div[@class='header-layout']//button)[1]")
     private ExtendedWebElement hamburgerMenu;
 
     @FindBy(id = "fat-menu")
@@ -27,7 +27,7 @@ public class Header extends AbstractUIObject implements ICustomTypePageFactory {
 
     @FindBy(css = "button.button_color_green.search-form__submit.ng-star-inserted")
     private ExtendedWebElement searchButton;
-
+/*
     @FindBy(xpath = "//ul[@class='lang lang-header ng-star-inserted']/li")
     private List<ExtendedWebElement> languageItems;
 
@@ -39,11 +39,11 @@ public class Header extends AbstractUIObject implements ICustomTypePageFactory {
 
     @FindBy(xpath = "//li[@class='header-actions__item header-actions__item--user']//button")
     private ExtendedWebElement userIcon;
-
-    @FindBy(xpath = "//li[@class='header-actions__item header-actions__item--cart']//button")
+*/
+    @FindBy(xpath = "button.header__button.ng-star-inserted.header__button--active")
     private ExtendedWebElement cartIcon;
 
-    @FindBy(xpath = "//span[@class='counter counter--green ng-star-inserted']")
+    @FindBy(xpath = "button.header__button.ng-star-inserted.header__button--active span")
     private ExtendedWebElement productCounter;
 
     @FindBy(css = "button[aria-label='Списки порівнянь']")

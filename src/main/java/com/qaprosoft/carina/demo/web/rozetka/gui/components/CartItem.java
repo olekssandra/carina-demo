@@ -11,10 +11,10 @@ public class CartItem extends AbstractUIObject {
     @FindBy(xpath = ".//a[@class='cart-product__title']")
     private ExtendedWebElement productTitle;
 
-    @FindBy(xpath = ".//button[@class='button button_color_white button_size_medium cart-counter__button'][2]")
+    @FindBy(xpath = ".//button[@data-testid='cart-counter-increment-button']")
     private ExtendedWebElement addProductBtn;
 
-    @FindBy(xpath = ".(//button[@class='button button_color_white button_size_medium cart-counter__button'])[1]")
+    @FindBy(xpath = ".//button[@data-testid='cart-counter-decrement-button']")
     private ExtendedWebElement removeProductBtn;
 
     @FindBy(id = "cartProductActions0")
