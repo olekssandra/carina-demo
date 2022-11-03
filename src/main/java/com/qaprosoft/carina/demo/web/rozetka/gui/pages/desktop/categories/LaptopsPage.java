@@ -2,6 +2,7 @@ package com.qaprosoft.carina.demo.web.rozetka.gui.pages.desktop.categories;
 
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.demo.web.rozetka.gui.components.ProductFilter;
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.ProductItem;
 import com.qaprosoft.carina.demo.web.rozetka.gui.enums.ProductSortingOptions;
 import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.LaptopsPageBase;
@@ -10,10 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.lang.invoke.MethodHandles;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,22 +21,17 @@ public class LaptopsPage extends LaptopsPageBase {
 
     @FindBy(css = "h1.catalog-heading.ng-star-inserted")
     private ExtendedWebElement title;
+
     @FindBy(xpath = "//ul[@class='catalog-grid ng-star-inserted']/li")
     private List<ProductItem> productItems;
 
     @FindBy(xpath = "//ul[@class='catalog-grid ng-star-inserted']/li")
     private ExtendedWebElement firstProductItem;
 
-    @FindBy(xpath = "//a[@data-id='%s']")
-    private ExtendedWebElement filterLink;
+    @FindBy(css = "rz-filter-stack.ng-star-inserted")
+    private ProductFilter filter;
 
-    @FindBy(css = "div[data-filter-name='producer'] a")
-    private ExtendedWebElement filterBrandLink;
-
-    @FindBy(css = "div[data-filter-name='producer'] input[placeholder='Пошук']")
-    private ExtendedWebElement brandSearch;
-
-    @FindBy(className = "select-css")
+    @FindBy(xpath = "//div[@class='catalog-settings']//select")
     private ExtendedWebElement sortByDropDownList;
 
     @FindBy(xpath = "//select//option[@class='ng-star-inserted'][text()='%s']")
@@ -60,20 +53,13 @@ public class LaptopsPage extends LaptopsPageBase {
     }
 
     @Override
-    public LaptopsPageBase filterProductsByItem(String filterItem) {
-        filterLink.format(filterItem).click();
-        return initPage(getDriver(), LaptopsPageBase.class);
+    public ProductFilter getFilter() {
+        return filter;
     }
 
     @Override
     public boolean verifyProductTitles(String searchName) {
         return productItems.stream().allMatch(product -> StringUtils.containsIgnoreCase(product.readName(), searchName));
-    }
-
-    @Override
-    public boolean searchBrand(String brandName) {
-        brandSearch.type(brandName);
-        return StringUtils.containsIgnoreCase(filterBrandLink.getText(), brandName);
     }
 
     @Override
@@ -111,6 +97,7 @@ public class LaptopsPage extends LaptopsPageBase {
 
     @Override
     public String getFirstProductName() {
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(firstProductItem.getBy()), 5);
         return productItems.get(0).readName();
     }
 }

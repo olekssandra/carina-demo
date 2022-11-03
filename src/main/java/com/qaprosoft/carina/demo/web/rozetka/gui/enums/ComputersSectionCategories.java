@@ -2,13 +2,15 @@ package com.qaprosoft.carina.demo.web.rozetka.gui.enums;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.LaptopsPageBase;
+import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.TabletsPageBase;
+import com.qaprosoft.carina.demo.web.rozetka.gui.pages.desktop.categories.TabletsPage;
 
 public enum ComputersSectionCategories {
-    LAPTOPS("Ноутбуки", LaptopsPageBase.class);
+    LAPTOPS("Ноутбуки", LaptopsPageBase.class),
 //    COMPUTERS_NETTOPS_MONOBLOCS("Комп'ютери, неттопи, моноблоки"),
 //    MONITORS("Монітори"),
 //    GAMING("Gaming"),
-//    TABLETS("Планшети"),
+    TABLETS("Планшети", TabletsPageBase.class);
 //    CABLES_AND_ADAPTERS("Кабелі та адаптери"),
 //    COMPUTER_COMPONENTS("Комп'ютерні комплектуючі"),
 //    NETWORK_EQUIPMENT("Мережеве обладнання"),

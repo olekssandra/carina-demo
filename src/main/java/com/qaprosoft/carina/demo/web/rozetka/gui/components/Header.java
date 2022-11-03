@@ -27,19 +27,7 @@ public class Header extends AbstractUIObject implements ICustomTypePageFactory {
 
     @FindBy(css = "button.button_color_green.search-form__submit.ng-star-inserted")
     private ExtendedWebElement searchButton;
-/*
-    @FindBy(xpath = "//ul[@class='lang lang-header ng-star-inserted']/li")
-    private List<ExtendedWebElement> languageItems;
 
-    @FindBy(xpath = "//span[@class='lang__link lang__link--active ng-star-inserted']/text()")
-    private ExtendedWebElement currentLanguage;
-
-    @FindBy(xpath = "//a[@class='help-zsu header-actions__component']")
-    private ExtendedWebElement comeBackAliveLink;
-
-    @FindBy(xpath = "//li[@class='header-actions__item header-actions__item--user']//button")
-    private ExtendedWebElement userIcon;
-*/
     @FindBy(xpath = "button.header__button.ng-star-inserted.header__button--active")
     private ExtendedWebElement cartIcon;
 

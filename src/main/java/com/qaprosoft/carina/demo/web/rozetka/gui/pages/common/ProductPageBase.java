@@ -23,5 +23,7 @@ public abstract class ProductPageBase extends AbstractPage {
 
     public abstract boolean isCompareFramePresent();
 
+    public abstract boolean isCartFramePresent();
+
     public abstract String getProductTitle();
 }

@@ -8,18 +8,19 @@ import com.qaprosoft.carina.demo.web.rozetka.gui.components.Header;
 import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.ProductPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = ProductPageBase.class)
 public class ProductPage extends ProductPageBase {
 
     @FindBy(className = "header-layout")
     private Header header;
+
     @FindBy(className = "product__title")
     private ExtendedWebElement productTitle;
 
     @FindBy(className = "product-prices__big")
     private ExtendedWebElement productPrice;
+
     @FindBy(className = "product__buy")
     private ExtendedWebElement buyProductBtn;
 
@@ -45,8 +46,9 @@ public class ProductPage extends ProductPageBase {
 
     @Override
     public CartFrame clickBuyButton() {
-        waitUntil(ExpectedConditions.elementToBeClickable(buyProductBtn.getBy()), 5);
         buyProductBtn.click();
+        if(!isCartFramePresent())
+            buyProductBtn.click();
         return new CartFrame(driver);
     }
 
@@ -69,6 +71,11 @@ public class ProductPage extends ProductPageBase {
     @Override
     public boolean isCompareFramePresent() {
         return compareFrame.isUIObjectPresent();
+    }
+
+    @Override
+    public boolean isCartFramePresent() {
+        return cartFrame.isUIObjectPresent();
     }
 
     @Override

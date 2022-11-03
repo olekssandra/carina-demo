@@ -18,10 +18,10 @@ public class LaptopsAndComputersSectionPage extends LaptopsAndComputersSectionPa
     @FindBy(css = "h1.portal__heading.ng-star-inserted")
     private ExtendedWebElement title;
 
-    @FindBy(xpath = "//ul[@class='portal-grid portal-grid_type_1_6']/li")
+    @FindBy(xpath = "//div[@class='tile-cats']")
     private List<ExtendedWebElement> categories;
 
-    @FindBy(xpath = "//ul[@class='portal-grid portal-grid_type_1_6']/li")
+    @FindBy(xpath = "//div[@class='tile-cats']")
     private ExtendedWebElement firstCategory;
 
     public LaptopsAndComputersSectionPage(WebDriver driver) {
