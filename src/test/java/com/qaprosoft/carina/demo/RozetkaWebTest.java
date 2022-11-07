@@ -2,10 +2,13 @@ package com.qaprosoft.carina.demo;
 
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
+import com.qaprosoft.carina.core.foundation.dataprovider.annotations.CsvDataSourceParameters;
+import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.CartFrame;
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.CompareList;
 import com.qaprosoft.carina.demo.web.rozetka.gui.components.Header;
+import com.qaprosoft.carina.demo.web.rozetka.gui.components.ProductFilter;
 import com.qaprosoft.carina.demo.web.rozetka.gui.enums.ComputersSectionCategories;
 import com.qaprosoft.carina.demo.web.rozetka.gui.enums.ProductSortingOptions;
 import com.qaprosoft.carina.demo.web.rozetka.gui.enums.Sections;
@@ -13,6 +16,8 @@ import com.qaprosoft.carina.demo.web.rozetka.gui.pages.common.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
 
 
 public class RozetkaWebTest implements IAbstractTest {
@@ -100,7 +105,8 @@ public class RozetkaWebTest implements IAbstractTest {
         LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         Assert.assertTrue(laptopsPage.isPageOpened(), "Laptops page is not opened");
         String brandName = "ASUS";
-        laptopsPage.filterProductsByItem(brandName);
+        ProductFilter filter = laptopsPage.getFilter();
+        filter.filterProductsByItem(brandName, ComputersSectionCategories.LAPTOPS.getCategoryPage());
         Assert.assertTrue(laptopsPage.verifyProductTitles(brandName), "Products were not filtered by brand");
     }
 
@@ -116,7 +122,8 @@ public class RozetkaWebTest implements IAbstractTest {
         LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         Assert.assertTrue(laptopsPage.isPageOpened(), "Laptops page is not opened");
         String brandName = "Lenovo";
-        Assert.assertTrue(laptopsPage.searchBrand(brandName), "Filter search doesn't work correctly");
+        ProductFilter filter = laptopsPage.getFilter();
+        Assert.assertTrue(filter.searchBrand(brandName), "Filter search doesn't work correctly");
     }
 
     @Test()
@@ -143,7 +150,8 @@ public class RozetkaWebTest implements IAbstractTest {
         Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
         LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         String brand = "Lenovo";
-        laptopsPage.filterProductsByItem(brand);
+        ProductFilter filter = laptopsPage.getFilter();
+        filter.filterProductsByItem(brand, ComputersSectionCategories.LAPTOPS.getCategoryPage());
         Assert.assertTrue(laptopsPage.verifyProductTitles(brand), "Products were not filtered by brand");
         laptopsPage.sortProductsByOption(ProductSortingOptions.CHEAP_TO_EXPENSIVE.getOptionName());
         Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.CHEAP_TO_EXPENSIVE.getOptionName()), "Products were not sorted from cheap to expensive");
@@ -160,7 +168,8 @@ public class RozetkaWebTest implements IAbstractTest {
         Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
         LaptopsPageBase laptopsPage = (LaptopsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.LAPTOPS);
         String brand = "Lenovo";
-        laptopsPage.filterProductsByItem(brand);
+        ProductFilter filter = laptopsPage.getFilter();
+        filter.filterProductsByItem(brand, ComputersSectionCategories.LAPTOPS.getCategoryPage());
         Assert.assertTrue(laptopsPage.verifyProductTitles(brand), "Products were not filtered by brand");
         laptopsPage.sortProductsByOption(ProductSortingOptions.EXPENSIVE_TO_CHEAP.getOptionName());
         Assert.assertTrue(laptopsPage.verifyProductPrices(ProductSortingOptions.EXPENSIVE_TO_CHEAP.getOptionName()), "Products were not sorted from expensive to cheap");
@@ -175,5 +184,39 @@ public class RozetkaWebTest implements IAbstractTest {
         ProductComparisonPageBase productComparisonPage = compareList.openComparisonList(ComputersSectionCategories.LAPTOPS.getCategoryName());
         Assert.assertTrue(productComparisonPage.isPageOpened(ComputersSectionCategories.LAPTOPS.getCategoryName()), "Product comparison page is not opened");
         Assert.assertTrue(productComparisonPage.verifyProduct(productName), "Comparison page does not contain the selected product");
+    }
+
+    @Test(dataProvider = "DataProvider")
+    @CsvDataSourceParameters(path = "csv/select_tablet_brand.csv", dsUid = "TUID")
+    public void testFilterTabletsByBrand(HashMap<String, String> tabletBrand) {
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.open();
+        LaptopsAndComputersSectionPageBase laptopsAndComputersSectionPage =
+                (LaptopsAndComputersSectionPageBase) homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS);
+        Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
+        TabletsPageBase tabletsPage = (TabletsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.TABLETS);
+        Assert.assertTrue(tabletsPage.isPageOpened(), "Laptops page is not opened");
+        String brandName = tabletBrand.get("brandName");
+        ProductFilter filter = tabletsPage.getFilter();
+        filter.filterProductsByItem(brandName,ComputersSectionCategories.TABLETS.getCategoryPage());
+        Assert.assertTrue(tabletsPage.verifyTabletNames(brandName), "Products were not filtered by brand");
+    }
+
+    @Test(dataProvider = "DataProvider")
+    @XlsDataSourceParameters(path = "xls/filter_price.xlsx", sheet = "FilterRozetka", dsUid = "TUID", dsArgs = "min_price, max_price")
+    public void testFilterTabletsByPrice(String min_price, String max_price) {
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.open();
+        LaptopsAndComputersSectionPageBase laptopsAndComputersSectionPage =
+                (LaptopsAndComputersSectionPageBase) homePage.openLaptopsAndComputersSectionPage(Sections.LAPTOPS_AND_COMPUTERS);
+        Assert.assertTrue(laptopsAndComputersSectionPage.isPageOpened(), "Product section page is not opened");
+        TabletsPageBase tabletsPage = (TabletsPageBase) laptopsAndComputersSectionPage.openCategoryPage(ComputersSectionCategories.TABLETS);
+        Assert.assertTrue(tabletsPage.isPageOpened(), "Laptops page is not opened");
+        Assert.assertTrue(Integer.parseInt(min_price) >= 123, "Minimum price is less than the minimum allowable price (123)");
+        Assert.assertTrue(Integer.parseInt(max_price) <= 492408, "Maximum price is greater than the maximum allowable price (492408)");
+        Assert.assertFalse(Integer.parseInt(min_price) > Integer.parseInt(max_price), "Wrong min and max values");
+        ProductFilter filter = tabletsPage.getFilter();
+        filter.filterProductsByPrice(min_price, max_price, ComputersSectionCategories.TABLETS.getCategoryPage());
+        Assert.assertTrue(tabletsPage.verifyTabletPrices(min_price, max_price), "Products were not filtered by price");
     }
 }

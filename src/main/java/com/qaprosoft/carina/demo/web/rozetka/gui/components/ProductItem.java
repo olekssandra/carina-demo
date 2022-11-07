@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ProductItem extends AbstractUIObject implements ICustomTypePageFactory {
 
-    @FindBy(xpath = ".//a[@class='goods-tile__heading ng-star-inserted']")
+    @FindBy(xpath = ".//span[@class='goods-tile__title']")
     private ExtendedWebElement productName;
 
     @FindBy(xpath = ".//span[@class='goods-tile__price-value']")

@@ -27,7 +27,7 @@ public class CartFrame extends AbstractUIObject {
     @FindBy(className = "cart-receipt__submit")
     private ExtendedWebElement submitOrderBtn;
 
-    @FindBy(className = "modal__close")
+    @FindBy(xpath = "//div[@class='modal__header']//button")
     private ExtendedWebElement closeBtn;
 
     @FindBy(css = "button[data-testid='continue-shopping-link']")
@@ -53,7 +53,7 @@ public class CartFrame extends AbstractUIObject {
     }
 
     public String getFinalPrice() {
-        waitUntil(ExpectedConditions.visibilityOfElementLocated(finalPrice.getBy()), 5);
+        waitUntil(ExpectedConditions.elementToBeClickable(submitOrderBtn.getBy()), 5);
         return finalPrice.getText();
     }
 
@@ -63,7 +63,6 @@ public class CartFrame extends AbstractUIObject {
     }
 
     public CartFrame increaseProductQuantity(String productName) {
-        waitUntil(ExpectedConditions.visibilityOfElementLocated(firstCartItem.getBy()), 5);
         findCartItem(productName).clickAddProductBtn();
         return new CartFrame(driver);
     }
