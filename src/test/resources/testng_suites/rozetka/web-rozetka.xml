@@ -97,7 +97,7 @@
         <classes>
             <class name="com.qaprosoft.carina.demo.RozetkaWebTest">
                 <methods>
-                    <include name="FilterTabletsByBrand"/>
+                    <include name="testFilterTabletsByBrand"/>
                 </methods>
             </class>
         </classes>

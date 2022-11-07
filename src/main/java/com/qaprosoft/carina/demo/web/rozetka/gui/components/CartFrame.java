@@ -53,7 +53,7 @@ public class CartFrame extends AbstractUIObject {
     }
 
     public String getFinalPrice() {
-        waitUntil(ExpectedConditions.visibilityOfElementLocated(finalPrice.getBy()), 5);
+        waitUntil(ExpectedConditions.elementToBeClickable(submitOrderBtn.getBy()), 5);
         return finalPrice.getText();
     }
 
@@ -63,7 +63,6 @@ public class CartFrame extends AbstractUIObject {
     }
 
     public CartFrame increaseProductQuantity(String productName) {
-        waitUntil(ExpectedConditions.elementToBeClickable(submitOrderBtn.getBy()), 5);
         findCartItem(productName).clickAddProductBtn();
         return new CartFrame(driver);
     }
